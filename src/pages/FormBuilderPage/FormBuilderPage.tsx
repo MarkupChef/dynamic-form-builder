@@ -1,3 +1,5 @@
+import FormBuilder from "@/components/FormBuilder";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Form,
@@ -7,11 +9,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const formSchema = z.object({
   formName: z.string().min(2, {
@@ -51,6 +52,7 @@ const FormBuilderPage = () => {
                   </FormItem>
                 )}
               />
+              <FormBuilder />
               <Button type="submit">Publish</Button>
             </form>
           </Form>
