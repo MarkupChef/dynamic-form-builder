@@ -1,8 +1,9 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router";
+import Navigation from "@/layouts/Navigation";
+import FormBuilderPage from "@/pages/FormBuilderPage";
 import FormListPage from "@/pages/FormListPage";
 import { ROUTES } from "@/utils/constants/routes.ts";
-import Navigation from "@/layouts/Navigation";
+import { BrowserRouter, Route, Routes } from "react-router";
+import "./App.css";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path={ROUTES.root} element={<h1>Home page</h1>} />
           <Route path={ROUTES.forms} element={<FormListPage />} />
+          <Route path={ROUTES.formCreate} element={<FormBuilderPage />} />
         </Routes>
       </BrowserRouter>
     </>
