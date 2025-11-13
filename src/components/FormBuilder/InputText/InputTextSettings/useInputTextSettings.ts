@@ -1,5 +1,8 @@
 import { useAppDispatch } from "@/redux-store/hooks.ts";
-import { saveInputTextSettings } from "@/redux-store/slices/formBuilder.slice.ts";
+import {
+  type FormBuilderInputTextField,
+  saveInputTextSettings,
+} from "@/redux-store/slices/formBuilder.slice.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -7,17 +10,25 @@ import { z } from "zod";
 export const InputTextSettingsSchema = z.object({
   label: z.string(),
   id: z.string(),
+  required: z.boolean(),
 });
 
-const useInputTextSettings = () => {
+const useInputTextSettings = (field: FormBuilderInputTextField) => {
   const dispatch = useAppDispatch();
   const form = useForm<z.infer<typeof InputTextSettingsSchema>>({
     resolver: zodResolver(InputTextSettingsSchema),
+    defaultValues: {
+      label: field.label,
+      required: field.required,
+      id: field.id,
+    },
   });
 
   const handleCloseSettings = (flag: boolean) => {
-    if (!flag && form.formState.isDirty) {
+    const isDirty = form.formState.isDirty;
+    if (!flag && isDirty) {
       const formValues = form.getValues();
+      console.log(formValues);
       form.reset(formValues);
       dispatch(saveInputTextSettings(formValues));
     }

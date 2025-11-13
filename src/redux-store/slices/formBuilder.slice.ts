@@ -12,6 +12,7 @@ export interface FormBuilderInputTextField {
   value: string;
   label: string;
   placeholder: string;
+  required: boolean;
 }
 
 interface FormBuilderState {
@@ -41,6 +42,7 @@ const formBuilderSlice = createSlice({
         value: "",
         label: "Label text",
         placeholder: "Example",
+        required: false,
       });
     },
 

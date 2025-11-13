@@ -8,7 +8,11 @@ const InputText = ({ field }: { field: FormBuilderInputTextField }) => {
     <>
       <Label htmlFor={field.id}>{field.label}</Label>
       <div className={"flex gap-2"}>
-        <Input id={field.id} placeholder={field.placeholder} />
+        <Input
+          id={field.id}
+          placeholder={field.placeholder}
+          required={field.required}
+        />
         <InputTextSettings field={field} />
       </div>
     </>
