@@ -14,6 +14,7 @@ export interface FormBuilderInputTextField {
   placeholder: string;
   required: boolean;
   maxLength?: number;
+  minLength?: number;
 }
 
 interface FormBuilderState {

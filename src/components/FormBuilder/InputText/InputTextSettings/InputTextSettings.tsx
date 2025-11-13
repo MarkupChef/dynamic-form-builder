@@ -106,6 +106,30 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
 
               <FormField
                 control={form.control}
+                name={"minLength"}
+                render={({ field: f }) => (
+                  <FormItem>
+                    <div className="grid gap-2">
+                      <div className="grid grid-cols-3 items-center gap-4">
+                        <Label htmlFor={`minLength_${field.id}`}>
+                          Min Length:
+                        </Label>
+                        <FormControl>
+                          <Input
+                            id={`minLength_${field.id}`}
+                            className="col-span-2 h-8"
+                            type={"number"}
+                            {...f}
+                          />
+                        </FormControl>
+                      </div>
+                    </div>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name={"maxLength"}
                 render={({ field: f }) => (
                   <FormItem>
@@ -118,6 +142,7 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
                           <Input
                             id={`maxLength_${field.id}`}
                             className="col-span-2 h-8"
+                            type={"number"}
                             {...f}
                           />
                         </FormControl>

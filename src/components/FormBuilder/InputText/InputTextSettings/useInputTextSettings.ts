@@ -12,6 +12,7 @@ export const InputTextSettingsSchema = z.object({
   id: z.string(),
   required: z.boolean(),
   placeholder: z.string(),
+  minLength: z.number(),
   maxLength: z.number(),
 });
 
