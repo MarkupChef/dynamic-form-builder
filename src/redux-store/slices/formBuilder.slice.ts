@@ -13,6 +13,7 @@ export interface FormBuilderInputTextField {
   label: string;
   placeholder: string;
   required: boolean;
+  maxLength?: number;
 }
 
 interface FormBuilderState {

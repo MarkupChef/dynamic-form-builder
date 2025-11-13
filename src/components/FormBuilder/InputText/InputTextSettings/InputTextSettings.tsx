@@ -35,6 +35,12 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
             <form className="space-y-8">
               <FormField
                 control={form.control}
+                name={"id"}
+                render={({ field: f }) => <Input hidden {...f} />}
+              />
+
+              <FormField
+                control={form.control}
                 name={"label"}
                 render={({ field: f }) => (
                   <FormItem>
@@ -100,8 +106,25 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
 
               <FormField
                 control={form.control}
-                name={"id"}
-                render={({ field: f }) => <Input hidden {...f} />}
+                name={"maxLength"}
+                render={({ field: f }) => (
+                  <FormItem>
+                    <div className="grid gap-2">
+                      <div className="grid grid-cols-3 items-center gap-4">
+                        <Label htmlFor={`maxLength_${field.id}`}>
+                          Max Length:
+                        </Label>
+                        <FormControl>
+                          <Input
+                            id={`maxLength_${field.id}`}
+                            className="col-span-2 h-8"
+                            {...f}
+                          />
+                        </FormControl>
+                      </div>
+                    </div>
+                  </FormItem>
+                )}
               />
             </form>
           </Form>

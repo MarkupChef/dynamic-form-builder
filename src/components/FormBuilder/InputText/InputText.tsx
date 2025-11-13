@@ -4,6 +4,12 @@ import { Label } from "@/components/ui/label.tsx";
 import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
 
 const InputText = ({ field }: { field: FormBuilderInputTextField }) => {
+  const maxLengthProp = {
+    ...(field.maxLength && field.maxLength > 0
+      ? { maxLength: field.maxLength }
+      : {}),
+  };
+
   return (
     <>
       <Label htmlFor={field.id}>{field.label}</Label>
@@ -12,6 +18,7 @@ const InputText = ({ field }: { field: FormBuilderInputTextField }) => {
           id={field.id}
           placeholder={field.placeholder}
           required={field.required}
+          {...maxLengthProp}
         />
         <InputTextSettings field={field} />
       </div>
