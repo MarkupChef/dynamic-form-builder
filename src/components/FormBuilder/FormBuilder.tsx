@@ -15,7 +15,7 @@ const FormBuilder = () => {
   return (
     <div>
       {fields.map((field) => (
-        <FieldItem field={field} />
+        <FieldItem key={field.id} field={field} />
       ))}
       <hr className={"my-4"} />
       <DropdownMenu>

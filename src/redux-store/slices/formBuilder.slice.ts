@@ -1,9 +1,11 @@
+import { InputTextSettingsSchema } from "@/components/FormBuilder/InputText/InputTextSettings/useInputTextSettings.ts";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
+import { z } from "zod";
 
 export type InputTypes = "inputText";
 
-export interface FormBuilderField {
+export interface FormBuilderInputTextField {
   type: InputTypes;
   id: string;
   name: string;
@@ -14,7 +16,7 @@ export interface FormBuilderField {
 
 interface FormBuilderState {
   isShowLabel: boolean;
-  fields: FormBuilderField[];
+  fields: FormBuilderInputTextField[];
 }
 
 const initialState: FormBuilderState = {
@@ -29,7 +31,7 @@ const formBuilderSlice = createSlice({
     toggleLabelOption: (state) => {
       state.isShowLabel = !state.isShowLabel;
     },
-    addTextField: (state, action: PayloadAction<InputTypes>) => {
+    addInputTextField: (state, action: PayloadAction<InputTypes>) => {
       const id = `Field_${nanoid()}`;
 
       state.fields.push({
@@ -41,12 +43,28 @@ const formBuilderSlice = createSlice({
         placeholder: "Example",
       });
     },
+
+    saveInputTextSettings: (
+      state,
+      action: PayloadAction<z.infer<typeof InputTextSettingsSchema>>,
+    ) => {
+      const field = state.fields.find((f) => f.id === action.payload.id);
+
+      if (field) {
+        Object.assign(field, action.payload);
+      }
+    },
+
     removeField(state, action: PayloadAction<{ id: string }>) {
       state.fields = state.fields.filter((f) => f.id !== action.payload.id);
     },
   },
 });
 
-export const { toggleLabelOption, addTextField, removeField } =
-  formBuilderSlice.actions;
+export const {
+  toggleLabelOption,
+  addInputTextField,
+  saveInputTextSettings,
+  removeField,
+} = formBuilderSlice.actions;
 export default formBuilderSlice.reducer;
