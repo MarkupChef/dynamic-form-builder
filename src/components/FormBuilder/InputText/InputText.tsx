@@ -22,6 +22,7 @@ const InputText = ({ field }: { field: FormBuilderInputTextField }) => {
       <div className={"flex gap-2"}>
         <Input
           id={field.id}
+          type={field.typeValue}
           placeholder={field.placeholder}
           required={field.required}
           {...minLengthProp}

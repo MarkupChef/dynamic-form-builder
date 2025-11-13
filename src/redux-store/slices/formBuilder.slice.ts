@@ -15,6 +15,7 @@ export interface FormBuilderInputTextField {
   required: boolean;
   maxLength?: number;
   minLength?: number;
+  typeValue: "text" | "number";
 }
 
 interface FormBuilderState {
@@ -45,6 +46,7 @@ const formBuilderSlice = createSlice({
         label: "Label text",
         placeholder: "Example",
         required: false,
+        typeValue: "text",
       });
     },
 

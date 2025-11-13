@@ -14,6 +14,7 @@ export const InputTextSettingsSchema = z.object({
   placeholder: z.string(),
   minLength: z.number(),
   maxLength: z.number(),
+  typeValue: z.string(),
 });
 
 const useInputTextSettings = (field: FormBuilderInputTextField) => {
@@ -25,6 +26,8 @@ const useInputTextSettings = (field: FormBuilderInputTextField) => {
       required: field.required,
       id: field.id,
       placeholder: field.placeholder,
+      typeValue: field.typeValue,
+      minLength: field.minLength,
       maxLength: field.maxLength,
     },
   });

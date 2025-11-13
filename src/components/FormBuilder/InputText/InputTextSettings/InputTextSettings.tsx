@@ -13,9 +13,24 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover.tsx";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
 import { SettingsIcon } from "lucide-react";
+
+const typesValue = [
+  { label: "Text", value: "text" },
+  {
+    label: "Number",
+    value: "number",
+  },
+];
 
 const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
   const { form, handleCloseSettings } = useInputTextSettings(field);
@@ -106,21 +121,35 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
 
               <FormField
                 control={form.control}
-                name={"minLength"}
+                name={"typeValue"}
                 render={({ field: f }) => (
                   <FormItem>
                     <div className="grid gap-2">
                       <div className="grid grid-cols-3 items-center gap-4">
-                        <Label htmlFor={`minLength_${field.id}`}>
-                          Min Length:
+                        <Label htmlFor={`typeValue_${field.id}`}>
+                          Type of Value:
                         </Label>
                         <FormControl>
-                          <Input
-                            id={`minLength_${field.id}`}
-                            className="col-span-2 h-8"
-                            type={"number"}
-                            {...f}
-                          />
+                          {/* TODO: there is warning "The specified value "text"/"number" cannot be parsed, or is out of range."  Solve it if I have time */}
+                          <Select
+                            name={f.name}
+                            value={f.value}
+                            onValueChange={f.onChange}
+                          >
+                            <SelectTrigger
+                              id={`typeValue_${field.id}`}
+                              className="min-w-[120px]"
+                            >
+                              <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent position="item-aligned">
+                              {typesValue.map((type) => (
+                                <SelectItem key={type.value} value={type.value}>
+                                  {type.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </FormControl>
                       </div>
                     </div>
@@ -141,6 +170,30 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
                         <FormControl>
                           <Input
                             id={`maxLength_${field.id}`}
+                            className="col-span-2 h-8"
+                            type={"number"}
+                            {...f}
+                          />
+                        </FormControl>
+                      </div>
+                    </div>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name={"typeValue"}
+                render={({ field: f }) => (
+                  <FormItem>
+                    <div className="grid gap-2">
+                      <div className="grid grid-cols-3 items-center gap-4">
+                        <Label htmlFor={`typeValue_${field.id}`}>
+                          Max Length:
+                        </Label>
+                        <FormControl>
+                          <Input
+                            id={`typeValue_${field.id}`}
                             className="col-span-2 h-8"
                             type={"number"}
                             {...f}
