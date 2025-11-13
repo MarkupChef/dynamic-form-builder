@@ -55,6 +55,28 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
               />
               <FormField
                 control={form.control}
+                name={"placeholder"}
+                render={({ field: f }) => (
+                  <FormItem>
+                    <div className="grid gap-2">
+                      <div className="grid grid-cols-3 items-center gap-4">
+                        <Label htmlFor={`placeholder_${field.id}`}>
+                          Placeholder:
+                        </Label>
+                        <FormControl>
+                          <Input
+                            id={`placeholder_${field.id}`}
+                            className="col-span-2 h-8"
+                            {...f}
+                          />
+                        </FormControl>
+                      </div>
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="required"
                 render={({ field: f }) => (
                   <FormItem>
