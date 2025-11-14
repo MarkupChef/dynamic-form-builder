@@ -1,4 +1,5 @@
 import FormBuilder from "@/components/FormBuilder";
+import FormPreview from "@/components/FormBuilder/FormPreview";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -53,6 +54,7 @@ const FormBuilderPage = () => {
                 )}
               />
               <FormBuilder />
+              <FormPreview />
               <Button type="submit">Publish</Button>
             </form>
           </Form>
