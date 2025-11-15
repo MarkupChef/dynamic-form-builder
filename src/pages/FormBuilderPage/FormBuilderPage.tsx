@@ -13,11 +13,14 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch.tsx";
 import { useAppDispatch, useAppSelector } from "@/redux-store/hooks.ts";
 import { toggleIsLabels } from "@/redux-store/slices/formBuilder.slice.ts";
+import { saveForm } from "@/redux-store/slices/forms.slice.ts";
+import { ROUTES } from "@/utils/constants/routes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 
-const formSchema = z.object({
+export const FormBuilderSchema = z.object({
   name: z.string().min(2, {
     message: "Form Name must be at least 2 characters.",
   }),
@@ -25,11 +28,12 @@ const formSchema = z.object({
 });
 
 const FormBuilderPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const formBuilder = useAppSelector((state) => state.formBuilder);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof FormBuilderSchema>>({
+    resolver: zodResolver(FormBuilderSchema),
     defaultValues: {
       name: formBuilder.name,
       isShowLabels: formBuilder.isShowLabels,
@@ -40,8 +44,14 @@ const FormBuilderPage = () => {
     dispatch(toggleIsLabels());
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(formData: z.infer<typeof FormBuilderSchema>) {
+    dispatch(
+      saveForm({
+        formData,
+        fields: formBuilder.fields,
+      }),
+    );
+    navigate(ROUTES.forms);
   }
 
   return (

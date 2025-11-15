@@ -24,12 +24,6 @@ const useInputTextSettings = (field: FormBuilderInputTextField) => {
     defaultValues: {
       label: field.label,
       ...field.props,
-      /*required: field.required,
-      id: field.id,
-      placeholder: field.placeholder,
-      type: field.typeValue,
-      minLength: field.minLength,
-      maxLength: field.maxLength,*/
     },
   });
 

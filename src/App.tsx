@@ -1,6 +1,6 @@
 import Navigation from "@/layouts/Navigation";
 import FormBuilderPage from "@/pages/FormBuilderPage";
-import FormListPage from "@/pages/FormListPage";
+import MyFormsPage from "@/pages/MyFormsPage";
 import { ROUTES } from "@/utils/constants/routes.ts";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
@@ -13,7 +13,7 @@ function App() {
         <hr className={"my-4"} />
         <Routes>
           <Route path={ROUTES.root} element={<h1>Home page</h1>} />
-          <Route path={ROUTES.forms} element={<FormListPage />} />
+          <Route path={ROUTES.forms} element={<MyFormsPage />} />
           <Route path={ROUTES.formCreate} element={<FormBuilderPage />} />
         </Routes>
       </BrowserRouter>

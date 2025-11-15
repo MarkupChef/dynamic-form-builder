@@ -15,7 +15,7 @@ import rootReducer from "./reducers";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["formBuilder"],
+  whitelist: ["forms", "formBuilder"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

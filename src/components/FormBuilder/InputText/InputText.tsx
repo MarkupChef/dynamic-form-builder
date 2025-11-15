@@ -1,9 +1,9 @@
 import { Input } from "@/components/ui/input.tsx";
-import type { ComponentProps, FC } from "react";
+import type { FC, InputHTMLAttributes } from "react";
 import type { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 interface InputTextProps {
-  fieldProps: ComponentProps<"input">;
+  fieldProps: InputHTMLAttributes<HTMLInputElement>;
   field?: ControllerRenderProps<FieldValues, string>;
 }
 

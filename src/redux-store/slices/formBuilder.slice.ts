@@ -1,7 +1,6 @@
 import { InputTextSettingsSchema } from "@/components/FormBuilder/InputText/InputTextSettings/useInputTextSettings.ts";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import type { ComponentProps } from "react";
 import { z } from "zod";
 
 export type InputTypes = "inputText";
@@ -10,24 +9,27 @@ export interface FormBuilderInputTextField {
   formBuilderFieldType: InputTypes;
   id: string;
   label: string;
-  props: ComponentProps<"input">;
-  /*id: string;
-  name: string;
-  value: string;
-  placeholder: string;
-  required: boolean;
-  maxLength?: number;
-  minLength?: number;
-  typeValue: "text" | "number";*/
+  props: {
+    id: string;
+    name: string;
+    value: string;
+    placeholder: string;
+    required: boolean;
+    maxLength?: number;
+    minLength?: number;
+    type: string;
+  };
 }
 
 export interface FormBuilderState {
+  id: string;
   name: string;
   isShowLabels: boolean;
   fields: FormBuilderInputTextField[];
 }
 
 const initialState: FormBuilderState = {
+  id: "",
   name: "",
   isShowLabels: true,
   fields: [],
