@@ -1,5 +1,5 @@
 import useFieldItem from "@/components/FieldItem/useFieldItem.ts";
-import InputText from "@/components/FormBuilder/InputText";
+import InputTextConfigure from "@/components/FormBuilder/InputTextConfigure";
 import { Button } from "@/components/ui/button.tsx";
 import { Item, ItemActions, ItemContent } from "@/components/ui/item";
 import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice";
@@ -12,7 +12,9 @@ const FieldItem = ({ field }: { field: FormBuilderInputTextField }) => {
     <Item className={"border border-gray-200 border-dashed my-4"}>
       <ItemContent>
         <div className="grid w-full max-w-sm items-center gap-3">
-          {field.type === "inputText" && <InputText field={field} />}
+          {field.formBuilderFieldType === "inputText" && (
+            <InputTextConfigure field={field} />
+          )}
         </div>
       </ItemContent>
       <ItemActions>

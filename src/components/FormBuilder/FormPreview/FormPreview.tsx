@@ -1,3 +1,5 @@
+import BuiltForm from "@/components/BuiltForm";
+import useFormPreview from "@/components/FormBuilder/FormPreview/useFormPreview.ts";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Dialog,
@@ -9,6 +11,8 @@ import {
 } from "@/components/ui/dialog.tsx";
 
 const FormPreview = () => {
+  const { builtForm } = useFormPreview();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -19,8 +23,9 @@ const FormPreview = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Form Preview</DialogTitle>
-          <DialogDescription>Field list</DialogDescription>
+          <DialogDescription>Check your built form</DialogDescription>
         </DialogHeader>
+        <BuiltForm builtForm={builtForm} />
       </DialogContent>
     </Dialog>
   );

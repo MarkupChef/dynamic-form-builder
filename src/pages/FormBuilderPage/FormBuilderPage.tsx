@@ -54,10 +54,10 @@ const FormBuilderPage = () => {
                 )}
               />
               <FormBuilder />
-              <FormPreview />
               <Button type="submit">Publish</Button>
             </form>
           </Form>
+          <FormPreview />
         </CardContent>
       </Card>
     </div>

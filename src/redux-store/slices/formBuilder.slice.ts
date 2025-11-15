@@ -1,24 +1,27 @@
 import { InputTextSettingsSchema } from "@/components/FormBuilder/InputText/InputTextSettings/useInputTextSettings.ts";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
+import type { ComponentProps } from "react";
 import { z } from "zod";
 
 export type InputTypes = "inputText";
 
 export interface FormBuilderInputTextField {
-  type: InputTypes;
+  formBuilderFieldType: InputTypes;
   id: string;
+  label: string;
+  props: ComponentProps<"input">;
+  /*id: string;
   name: string;
   value: string;
-  label: string;
   placeholder: string;
   required: boolean;
   maxLength?: number;
   minLength?: number;
-  typeValue: "text" | "number";
+  typeValue: "text" | "number";*/
 }
 
-interface FormBuilderState {
+export interface FormBuilderState {
   isShowLabel: boolean;
   fields: FormBuilderInputTextField[];
 }
@@ -39,14 +42,17 @@ const formBuilderSlice = createSlice({
       const id = `Field_${nanoid()}`;
 
       state.fields.push({
-        type: action.payload,
+        formBuilderFieldType: action.payload,
         id,
-        name: id,
-        value: "",
         label: "Label text",
-        placeholder: "Example",
-        required: false,
-        typeValue: "text",
+        props: {
+          id: id,
+          name: id,
+          value: "",
+          placeholder: "Example",
+          required: false,
+          type: "text",
+        },
       });
     },
 
@@ -56,8 +62,25 @@ const formBuilderSlice = createSlice({
     ) => {
       const field = state.fields.find((f) => f.id === action.payload.id);
 
+      state.fields = state.fields.map((f) => {
+        if (f.id === action.payload.id) {
+          const { label, ...rest } = action.payload;
+
+          return {
+            ...f,
+            label,
+            props: {
+              ...f.props,
+              ...rest,
+            },
+          };
+        }
+
+        return f;
+      });
+
       if (field) {
-        Object.assign(field, action.payload);
+        Object.assign(field.props, action.payload);
       }
     },
 

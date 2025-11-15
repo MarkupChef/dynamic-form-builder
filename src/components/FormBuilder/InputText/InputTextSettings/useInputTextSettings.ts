@@ -14,7 +14,7 @@ export const InputTextSettingsSchema = z.object({
   placeholder: z.string(),
   minLength: z.number(),
   maxLength: z.number(),
-  typeValue: z.string(),
+  type: z.string(),
 });
 
 const useInputTextSettings = (field: FormBuilderInputTextField) => {
@@ -23,12 +23,13 @@ const useInputTextSettings = (field: FormBuilderInputTextField) => {
     resolver: zodResolver(InputTextSettingsSchema),
     defaultValues: {
       label: field.label,
-      required: field.required,
+      ...field.props,
+      /*required: field.required,
       id: field.id,
       placeholder: field.placeholder,
-      typeValue: field.typeValue,
+      type: field.typeValue,
       minLength: field.minLength,
-      maxLength: field.maxLength,
+      maxLength: field.maxLength,*/
     },
   });
 
@@ -36,7 +37,6 @@ const useInputTextSettings = (field: FormBuilderInputTextField) => {
     const isDirty = form.formState.isDirty;
     if (!flag && isDirty) {
       const formValues = form.getValues();
-      console.log(formValues);
       form.reset(formValues);
       dispatch(saveInputTextSettings(formValues));
     }

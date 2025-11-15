@@ -1,36 +1,35 @@
-import InputTextSettings from "@/components/FormBuilder/InputText/InputTextSettings";
 import { Input } from "@/components/ui/input.tsx";
-import { Label } from "@/components/ui/label.tsx";
-import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
+import type { ComponentProps, FC } from "react";
+import type { ControllerRenderProps, FieldValues } from "react-hook-form";
 
-const InputText = ({ field }: { field: FormBuilderInputTextField }) => {
+interface InputTextProps {
+  fieldProps: ComponentProps<"input">;
+  field?: ControllerRenderProps<FieldValues, string>;
+}
+
+const InputText: FC<InputTextProps> = ({ fieldProps, field = {} }) => {
   const minLengthProp = {
-    ...(field.minLength && field.minLength > 0
-      ? { minLength: field.minLength }
+    ...(fieldProps.minLength && fieldProps.minLength > 0
+      ? { minLength: fieldProps.minLength }
       : {}),
   };
 
   const maxLengthProp = {
-    ...(field.maxLength && field.maxLength > 0
-      ? { maxLength: field.maxLength }
+    ...(fieldProps.maxLength && fieldProps.maxLength > 0
+      ? { maxLength: fieldProps.maxLength }
       : {}),
   };
 
   return (
-    <>
-      <Label htmlFor={field.id}>{field.label}</Label>
-      <div className={"flex gap-2"}>
-        <Input
-          id={field.id}
-          type={field.typeValue}
-          placeholder={field.placeholder}
-          required={field.required}
-          {...minLengthProp}
-          {...maxLengthProp}
-        />
-        <InputTextSettings field={field} />
-      </div>
-    </>
+    <Input
+      {...field}
+      id={fieldProps.id}
+      type={fieldProps.type}
+      placeholder={fieldProps.placeholder}
+      required={fieldProps.required}
+      {...minLengthProp}
+      {...maxLengthProp}
+    />
   );
 };
 

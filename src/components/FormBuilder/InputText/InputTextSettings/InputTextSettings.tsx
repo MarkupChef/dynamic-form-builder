@@ -27,8 +27,8 @@ import { SettingsIcon } from "lucide-react";
 const typesValue = [
   { label: "Text", value: "text" },
   {
-    label: "Number",
-    value: "number",
+    label: "Email",
+    value: "email",
   },
 ];
 
@@ -121,7 +121,7 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
 
               <FormField
                 control={form.control}
-                name={"typeValue"}
+                name={"type"}
                 render={({ field: f }) => (
                   <FormItem>
                     <div className="grid gap-2">
@@ -159,17 +159,17 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
 
               <FormField
                 control={form.control}
-                name={"maxLength"}
+                name={"minLength"}
                 render={({ field: f }) => (
                   <FormItem>
                     <div className="grid gap-2">
                       <div className="grid grid-cols-3 items-center gap-4">
-                        <Label htmlFor={`maxLength_${field.id}`}>
-                          Max Length:
+                        <Label htmlFor={`minLength_${field.id}`}>
+                          Min Length:
                         </Label>
                         <FormControl>
                           <Input
-                            id={`maxLength_${field.id}`}
+                            id={`minLength_${field.id}`}
                             className="col-span-2 h-8"
                             type={"number"}
                             {...f}
@@ -183,17 +183,17 @@ const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
 
               <FormField
                 control={form.control}
-                name={"typeValue"}
+                name={"maxLength"}
                 render={({ field: f }) => (
                   <FormItem>
                     <div className="grid gap-2">
                       <div className="grid grid-cols-3 items-center gap-4">
-                        <Label htmlFor={`typeValue_${field.id}`}>
+                        <Label htmlFor={`maxLength_${field.id}`}>
                           Max Length:
                         </Label>
                         <FormControl>
                           <Input
-                            id={`typeValue_${field.id}`}
+                            id={`maxLength_${field.id}`}
                             className="col-span-2 h-8"
                             type={"number"}
                             {...f}
