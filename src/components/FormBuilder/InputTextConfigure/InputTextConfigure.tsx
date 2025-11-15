@@ -1,6 +1,7 @@
 import InputText from "@/components/FormBuilder/InputText";
 import InputTextSettings from "@/components/FormBuilder/InputText/InputTextSettings";
 import { FormLabel } from "@/components/ui/form.tsx";
+import { useAppSelector } from "@/redux-store/hooks.ts";
 import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
 
 const InputTextConfigure = ({
@@ -8,9 +9,14 @@ const InputTextConfigure = ({
 }: {
   field: FormBuilderInputTextField;
 }) => {
+  const formBuilder = useAppSelector((state) => state.formBuilder);
+
   return (
     <>
-      <FormLabel htmlFor={field.id}>{field.label}</FormLabel>
+      {formBuilder.isShowLabels && (
+        <FormLabel htmlFor={field.id}>{field.label}</FormLabel>
+      )}
+
       <div className={"flex gap-2"}>
         <InputText fieldProps={field.props} />
         <InputTextSettings field={field} />

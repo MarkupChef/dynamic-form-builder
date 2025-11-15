@@ -22,12 +22,14 @@ export interface FormBuilderInputTextField {
 }
 
 export interface FormBuilderState {
-  isShowLabel: boolean;
+  name: string;
+  isShowLabels: boolean;
   fields: FormBuilderInputTextField[];
 }
 
 const initialState: FormBuilderState = {
-  isShowLabel: true,
+  name: "",
+  isShowLabels: true,
   fields: [],
 };
 
@@ -35,8 +37,8 @@ const formBuilderSlice = createSlice({
   name: "formBuilder",
   initialState,
   reducers: {
-    toggleLabelOption: (state) => {
-      state.isShowLabel = !state.isShowLabel;
+    toggleIsLabels: (state) => {
+      state.isShowLabels = !state.isShowLabels;
     },
     addInputTextField: (state, action: PayloadAction<InputTypes>) => {
       const id = `Field_${nanoid()}`;
@@ -91,7 +93,7 @@ const formBuilderSlice = createSlice({
 });
 
 export const {
-  toggleLabelOption,
+  toggleIsLabels,
   addInputTextField,
   saveInputTextSettings,
   removeField,

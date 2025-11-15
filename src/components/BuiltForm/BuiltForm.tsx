@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form.tsx";
+import { useAppSelector } from "@/redux-store/hooks.ts";
 import type { FormBuilderState } from "@/redux-store/slices/formBuilder.slice.ts";
 import { createDefaultValues } from "@/utils/helpers/createDefaultValues.helper.ts";
 import { createDynamicSchema } from "@/utils/helpers/createDynamicSchema.helper.ts";
@@ -16,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const BuiltForm = ({ builtForm }: { builtForm: FormBuilderState }) => {
+  const formBuilder = useAppSelector((state) => state.formBuilder);
   const createdSchema = createDynamicSchema(builtForm.fields);
   const createdDefaultValues = createDefaultValues(builtForm.fields);
 
@@ -43,9 +45,11 @@ const BuiltForm = ({ builtForm }: { builtForm: FormBuilderState }) => {
               name={builtField.id}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor={builtField.id}>
-                    {builtField.label}
-                  </FormLabel>
+                  {formBuilder.isShowLabels && (
+                    <FormLabel htmlFor={builtField.id}>
+                      {builtField.label}
+                    </FormLabel>
+                  )}
                   <FormControl>
                     <InputText field={field} fieldProps={builtField.props} />
                   </FormControl>
