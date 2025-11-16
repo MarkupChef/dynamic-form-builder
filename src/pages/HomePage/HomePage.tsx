@@ -19,7 +19,7 @@ const HomePage = () => {
     </div>
   );
 
-  return <PageLayout header={<H1>Home page</H1>} content={content} />;
+  return <PageLayout header={<H1>Home</H1>} content={content} />;
 };
 
 export default HomePage;

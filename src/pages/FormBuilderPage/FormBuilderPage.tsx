@@ -27,6 +27,7 @@ import {
 } from "@/redux-store/slices/formBuilder.slice.ts";
 import { saveForm } from "@/redux-store/slices/forms.slice.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { z } from "zod";
@@ -62,9 +63,14 @@ const FormBuilderPage = () => {
         fields: formBuilder.fields,
       }),
     );
-    dispatch(resetFormBuilderSlice());
     navigate(ROUTES.forms);
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetFormBuilderSlice());
+    };
+  }, [dispatch]);
 
   const content = (
     <>
