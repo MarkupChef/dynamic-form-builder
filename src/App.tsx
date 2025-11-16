@@ -1,4 +1,4 @@
-import Navigation from "@/layouts/Navigation";
+import MainLayout from "@/layouts/MainLayout";
 import FormBuilderPage from "@/pages/FormBuilderPage";
 import MyFormsPage from "@/pages/MyFormsPage";
 import { ROUTES } from "@/utils/constants/routes.ts";
@@ -9,12 +9,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navigation />
-        <hr className={"my-4"} />
         <Routes>
-          <Route path={ROUTES.root} element={<h1>Home page</h1>} />
-          <Route path={ROUTES.forms} element={<MyFormsPage />} />
-          <Route path={ROUTES.formCreate} element={<FormBuilderPage />} />
+          <Route path={ROUTES.root} element={<MainLayout />}>
+            <Route index element={<h1>Home page</h1>} />
+            <Route path={ROUTES.forms} element={<MyFormsPage />} />
+            <Route path={ROUTES.formCreate} element={<FormBuilderPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
