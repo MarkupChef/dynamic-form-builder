@@ -4,16 +4,15 @@ import { Outlet } from "react-router";
 
 const MainLayout = () => {
   return (
-    <>
-      <SidebarProvider>
+    <div>
+      <SidebarProvider defaultOpen={true} open={true}>
         <AppSidebar />
         <main>
           <SidebarTrigger />
           <Outlet />
         </main>
       </SidebarProvider>
-      <footer>2025</footer>
-    </>
+    </div>
   );
 };
 

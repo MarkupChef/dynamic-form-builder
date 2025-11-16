@@ -1,6 +1,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,6 +10,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { Large, Small } from "@/components/ui/typography.tsx";
 import mainNavigation from "@/config/mainNavigation.ts";
 import { matchPath, NavLink, useLocation } from "react-router";
 
@@ -37,12 +39,17 @@ function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Form Builder</SidebarGroupLabel>
+          <SidebarGroupLabel>
+            <Large>Form Builder</Large>
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>{renderNav()}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <Small>Copyright 2025</Small>
+      </SidebarFooter>
     </Sidebar>
   );
 }
