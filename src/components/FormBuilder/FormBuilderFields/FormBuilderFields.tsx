@@ -22,6 +22,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty.tsx";
 import { Form } from "@/components/ui/form.tsx";
+import { formBuilderFieldTypes } from "@/config/formBuilderFieldTypes.ts";
 import { CircleEllipsis, Plus } from "lucide-react";
 
 const FormBuilderEmpty = () => {
@@ -64,11 +65,14 @@ const FormBuilderFields = () => {
               <DropdownMenuContent>
                 <DropdownMenuLabel>Fields</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onSelect={() => handleSelectField("inputText")}
-                >
-                  Text Input
-                </DropdownMenuItem>
+                {formBuilderFieldTypes.map((item) => (
+                  <DropdownMenuItem
+                    key={item.value}
+                    onSelect={() => handleSelectField(item.value)}
+                  >
+                    {item.label}
+                  </DropdownMenuItem>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </form>

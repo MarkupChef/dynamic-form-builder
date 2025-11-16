@@ -1,8 +1,8 @@
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 
 export default interface FormBuilderState {
   id: string;
   name: string;
   isShowLabels: boolean;
-  fields: FormBuilderInputTextField[];
+  fields: FormBuilderInput[];
 }

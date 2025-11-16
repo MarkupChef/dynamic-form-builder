@@ -2,13 +2,9 @@ import InputText from "@/components/FormBuilder/InputText";
 import InputTextSettings from "@/components/FormBuilder/InputText/InputTextSettings";
 import { FormLabel } from "@/components/ui/form.tsx";
 import { useAppSelector } from "@/redux-store/hooks.ts";
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 
-const InputTextConfigure = ({
-  field,
-}: {
-  field: FormBuilderInputTextField;
-}) => {
+const InputTextConfigure = ({ field }: { field: FormBuilderInput }) => {
   const formBuilder = useAppSelector((state) => state.formBuilder);
 
   return (

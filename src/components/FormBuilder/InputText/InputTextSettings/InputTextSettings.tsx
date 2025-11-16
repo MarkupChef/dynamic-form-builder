@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { H4 } from "@/components/ui/typography.tsx";
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import { SettingsIcon } from "lucide-react";
 import styles from "./InputTextSettings.module.css";
 
@@ -35,7 +35,7 @@ const typesValue = [
   },
 ];
 
-const InputTextSettings = ({ field }: { field: FormBuilderInputTextField }) => {
+const InputTextSettings = ({ field }: { field: FormBuilderInput }) => {
   const { form, handleCloseSettings } = useInputTextSettings(field);
   return (
     <Popover onOpenChange={handleCloseSettings}>

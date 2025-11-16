@@ -1,12 +1,12 @@
 import { useAppDispatch } from "@/redux-store/hooks.ts";
 import { saveInputTextSettings } from "@/redux-store/slices/formBuilder.slice.ts";
 import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const useInputTextSettings = (field: FormBuilderInputTextField) => {
+const useInputTextSettings = (field: FormBuilderInput) => {
   const dispatch = useAppDispatch();
   const form = useForm<z.infer<typeof InputTextSettingsSchema>>({
     resolver: zodResolver(InputTextSettingsSchema),

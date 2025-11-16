@@ -1,6 +1,5 @@
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
-
 import FormBuilderSchema from "@/schemas/FormBuilder.schema";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import type FormBuilderState from "@/types/FormBuilderState.type";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
@@ -22,7 +21,7 @@ const formsSlice = createSlice({
       state,
       action: PayloadAction<{
         formData: z.infer<typeof FormBuilderSchema>;
-        fields: FormBuilderInputTextField[];
+        fields: FormBuilderInput[];
       }>,
     ) => {
       const id = `Form_${nanoid()}`;

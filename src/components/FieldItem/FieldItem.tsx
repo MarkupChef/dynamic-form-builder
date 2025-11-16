@@ -2,18 +2,18 @@ import useFieldItem from "@/components/FieldItem/useFieldItem.ts";
 import InputTextConfigure from "@/components/FormBuilder/InputTextConfigure";
 import { Button } from "@/components/ui/button.tsx";
 import { Item, ItemActions, ItemContent } from "@/components/ui/item";
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import { TrashIcon } from "lucide-react";
 import styles from "./FieldItem.module.css";
 
-const FieldItem = ({ field }: { field: FormBuilderInputTextField }) => {
+const FieldItem = ({ field }: { field: FormBuilderInput }) => {
   const { remove } = useFieldItem();
 
   return (
     <Item className={styles.root}>
       <ItemContent>
         <div className={styles.content}>
-          {field.formBuilderFieldType === "inputText" && (
+          {field.formBuilderFieldType === "text" && (
             <InputTextConfigure field={field} />
           )}
         </div>

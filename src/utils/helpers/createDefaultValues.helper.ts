@@ -1,6 +1,6 @@
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 
-export function createDefaultValues(fields: FormBuilderInputTextField[]) {
+export function createDefaultValues(fields: FormBuilderInput[]) {
   const defaults: Record<string, any> = {};
 
   fields.forEach((f) => {

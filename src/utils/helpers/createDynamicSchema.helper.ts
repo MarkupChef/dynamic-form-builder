@@ -1,7 +1,7 @@
-import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import { z } from "zod";
 
-export function createDynamicSchema(fields: FormBuilderInputTextField[]) {
+export function createDynamicSchema(fields: FormBuilderInput[]) {
   const shape: Record<string, any> = {};
 
   fields.forEach((field) => {
