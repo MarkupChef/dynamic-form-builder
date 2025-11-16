@@ -41,7 +41,7 @@ const FormList = () => {
 
   const renderList = () =>
     builtFormList.map((item) => (
-      <Item className={styles.formItem}>
+      <Item key={item.id} className={styles.formItem}>
         <ItemContent>
           <ItemTitle>{item.name}</ItemTitle>
         </ItemContent>

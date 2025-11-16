@@ -1,0 +1,81 @@
+import FieldItem from "@/components/FieldItem";
+import useFormBuilderFields from "@/components/FormBuilder/FormBuilderFields/useFormBuilderFields.ts";
+import { Button } from "@/components/ui/button.tsx";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.tsx";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu.tsx";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty.tsx";
+import { Form } from "@/components/ui/form.tsx";
+import { CircleEllipsis, Plus } from "lucide-react";
+
+const FormBuilderEmpty = () => {
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <CircleEllipsis />
+        </EmptyMedia>
+        <EmptyTitle>No Fields Yet</EmptyTitle>
+      </EmptyHeader>
+    </Empty>
+  );
+};
+
+const FormBuilderFields = () => {
+  const { formFields, fields, handleSelectField } = useFormBuilderFields();
+
+  const renderList = () =>
+    fields.map((field) => <FieldItem key={field.id} field={field} />);
+
+  return (
+    <Card className={"max-w-2xl"}>
+      <CardHeader>
+        <CardTitle>Fields</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...formFields}>
+          <form>
+            {fields.length > 0 ? renderList() : <FormBuilderEmpty />}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className={"text-center"}>
+                  <Button variant={"secondary"}>
+                    <Plus />
+                    Add Field
+                  </Button>
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Fields</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onSelect={() => handleSelectField("inputText")}
+                >
+                  Text Input
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default FormBuilderFields;

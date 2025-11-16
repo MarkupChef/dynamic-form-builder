@@ -1,4 +1,4 @@
-import { FormBuilderSchema } from "@/pages/FormBuilderPage/FormBuilderPage.tsx";
+import { FormBuilderSchema } from "@/components/FormBuilder/useFormBuilder.ts";
 import type {
   FormBuilderInputTextField,
   FormBuilderState,
