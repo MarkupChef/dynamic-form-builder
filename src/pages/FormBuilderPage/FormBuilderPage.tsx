@@ -12,7 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch.tsx";
 import { useAppDispatch, useAppSelector } from "@/redux-store/hooks.ts";
-import { toggleIsLabels } from "@/redux-store/slices/formBuilder.slice.ts";
+import {
+  resetFormBuilderSlice,
+  toggleIsLabels,
+} from "@/redux-store/slices/formBuilder.slice.ts";
 import { saveForm } from "@/redux-store/slices/forms.slice.ts";
 import { ROUTES } from "@/utils/constants/routes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,6 +54,7 @@ const FormBuilderPage = () => {
         fields: formBuilder.fields,
       }),
     );
+    dispatch(resetFormBuilderSlice());
     navigate(ROUTES.forms);
   }
 
