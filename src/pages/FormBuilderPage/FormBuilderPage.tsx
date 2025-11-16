@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch.tsx";
+import { ROUTES } from "@/config/routes.ts";
 import { useAppDispatch, useAppSelector } from "@/redux-store/hooks.ts";
 import {
   resetFormBuilderSlice,
   toggleIsLabels,
 } from "@/redux-store/slices/formBuilder.slice.ts";
 import { saveForm } from "@/redux-store/slices/forms.slice.ts";
-import { ROUTES } from "@/utils/constants/routes.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";

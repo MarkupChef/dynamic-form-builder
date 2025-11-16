@@ -1,7 +1,7 @@
+import { ROUTES } from "@/config/routes.ts";
 import MainLayout from "@/layouts/MainLayout";
 import FormBuilderPage from "@/pages/FormBuilderPage";
 import MyFormsPage from "@/pages/MyFormsPage";
-import { ROUTES } from "@/utils/constants/routes.ts";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
 
