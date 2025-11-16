@@ -1,0 +1,9 @@
+@reference "@/index.css";
+
+.root {
+	@apply h-full flex flex-col gap-4;
+}
+
+.content {
+	@apply grow;
+}

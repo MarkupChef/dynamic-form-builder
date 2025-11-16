@@ -1,14 +1,15 @@
 import AppSidebar from "@/components/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar.tsx";
 import { Outlet } from "react-router";
+import styles from "./MainLayout.module.css";
 
 const MainLayout = () => {
   return (
     <div>
-      <SidebarProvider defaultOpen={true} open={true}>
+      <SidebarProvider defaultOpen={true}>
         <AppSidebar />
-        <main>
-          <SidebarTrigger />
+        <SidebarTrigger />
+        <main className={styles.root}>
           <Outlet />
         </main>
       </SidebarProvider>

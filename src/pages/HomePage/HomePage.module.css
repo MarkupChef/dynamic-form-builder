@@ -1,0 +1,13 @@
+@reference "@/index.css";
+
+.root {
+	@apply h-full flex justify-center items-center;
+}
+
+.container {
+	@apply text-center;
+}
+
+.button {
+	@apply text-xl p-6;
+}

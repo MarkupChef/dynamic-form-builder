@@ -1,0 +1,5 @@
+@reference "@/index.css";
+
+.root {
+	@apply w-full p-6;
+}
