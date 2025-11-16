@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form.tsx";
 import { useAppSelector } from "@/redux-store/hooks.ts";
-import type { FormBuilderState } from "@/redux-store/slices/formBuilder.slice.ts";
+import type FormBuilderState from "@/types/FormBuilderState.type";
 import { createDefaultValues } from "@/utils/helpers/createDefaultValues.helper.ts";
 import { createDynamicSchema } from "@/utils/helpers/createDynamicSchema.helper.ts";
 import { zodResolver } from "@hookform/resolvers/zod";

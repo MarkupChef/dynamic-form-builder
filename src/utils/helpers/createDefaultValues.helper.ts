@@ -1,4 +1,4 @@
-import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
+import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
 
 export function createDefaultValues(fields: FormBuilderInputTextField[]) {
   const defaults: Record<string, any> = {};

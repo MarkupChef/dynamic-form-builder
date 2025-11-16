@@ -1,9 +1,7 @@
 import { useAppDispatch } from "@/redux-store/hooks.ts";
-import {
-  type FormBuilderInputTextField,
-  saveInputTextSettings,
-} from "@/redux-store/slices/formBuilder.slice.ts";
+import { saveInputTextSettings } from "@/redux-store/slices/formBuilder.slice.ts";
 import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
+import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

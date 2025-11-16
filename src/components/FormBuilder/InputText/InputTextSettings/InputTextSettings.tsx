@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { H4 } from "@/components/ui/typography.tsx";
-import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
+import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
 import { SettingsIcon } from "lucide-react";
 import styles from "./InputTextSettings.module.css";
 

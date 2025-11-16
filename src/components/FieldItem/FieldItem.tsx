@@ -2,7 +2,7 @@ import useFieldItem from "@/components/FieldItem/useFieldItem.ts";
 import InputTextConfigure from "@/components/FormBuilder/InputTextConfigure";
 import { Button } from "@/components/ui/button.tsx";
 import { Item, ItemActions, ItemContent } from "@/components/ui/item";
-import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice";
+import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
 import { TrashIcon } from "lucide-react";
 import styles from "./FieldItem.module.css";
 

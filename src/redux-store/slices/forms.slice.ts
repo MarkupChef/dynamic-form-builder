@@ -1,13 +1,12 @@
-import type {
-  FormBuilderInputTextField,
-  FormBuilderState,
-} from "@/redux-store/slices/formBuilder.slice.ts";
+import type FormBuilderInputTextField from "@/types/FormBuilderInputTextField.type";
+
 import FormBuilderSchema from "@/schemas/FormBuilder.schema";
+import type FormBuilderState from "@/types/FormBuilderState.type";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 import { z } from "zod";
 
-export interface FormsState {
+interface FormsState {
   forms: FormBuilderState[];
 }
 

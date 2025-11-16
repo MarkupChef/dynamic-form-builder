@@ -1,32 +1,8 @@
 import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
+import type FormBuilderState from "@/types/FormBuilderState.type.ts";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 import { z } from "zod";
-
-export type InputTypes = "inputText";
-
-export interface FormBuilderInputTextField {
-  formBuilderFieldType: InputTypes;
-  id: string;
-  label: string;
-  props: {
-    id: string;
-    name: string;
-    value: string;
-    placeholder: string;
-    required: boolean;
-    maxLength?: number;
-    minLength?: number;
-    type: string;
-  };
-}
-
-export interface FormBuilderState {
-  id: string;
-  name: string;
-  isShowLabels: boolean;
-  fields: FormBuilderInputTextField[];
-}
 
 const initialState: FormBuilderState = {
   id: "",
@@ -43,7 +19,7 @@ const formBuilderSlice = createSlice({
     toggleIsLabels: (state) => {
       state.isShowLabels = !state.isShowLabels;
     },
-    addInputTextField: (state, action: PayloadAction<InputTypes>) => {
+    addInputTextField: (state, action: PayloadAction<string>) => {
       const id = `Field_${nanoid()}`;
 
       state.fields.push({
