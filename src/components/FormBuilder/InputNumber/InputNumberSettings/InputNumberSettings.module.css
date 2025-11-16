@@ -1,0 +1,13 @@
+@reference "@/index.css";
+
+.form {
+	@apply space-y-6;
+}
+
+.formItem {
+	@apply grid grid-cols-3 items-center gap-4;
+}
+
+.formItemInput {
+	@apply col-span-2 h-8;
+}

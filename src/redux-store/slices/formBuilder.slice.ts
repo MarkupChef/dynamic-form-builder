@@ -19,6 +19,23 @@ const formBuilderSlice = createSlice({
     toggleIsLabels: (state) => {
       state.isShowLabels = !state.isShowLabels;
     },
+    addInputField: (state, action: PayloadAction<string>) => {
+      const id = `Field_${nanoid()}`;
+
+      state.fields.push({
+        formBuilderFieldType: action.payload,
+        id,
+        label: "Label text",
+        props: {
+          id: id,
+          name: id,
+          value: "",
+          placeholder: "Example",
+          required: false,
+          type: action.payload,
+        },
+      });
+    },
     addInputTextField: (state, action: PayloadAction<string>) => {
       const id = `Field_${nanoid()}`;
 
@@ -74,6 +91,7 @@ const formBuilderSlice = createSlice({
 export const {
   resetFormBuilderSlice,
   toggleIsLabels,
+  addInputField,
   addInputTextField,
   saveInputTextSettings,
   removeField,

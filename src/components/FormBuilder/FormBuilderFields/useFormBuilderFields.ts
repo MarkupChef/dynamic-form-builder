@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux-store/hooks.ts";
-import { addInputTextField } from "@/redux-store/slices/formBuilder.slice.ts";
+import { addInputField } from "@/redux-store/slices/formBuilder.slice.ts";
 import { useForm } from "react-hook-form";
 
 const useFormBuilderFields = () => {
@@ -9,7 +9,7 @@ const useFormBuilderFields = () => {
   const { fields } = formBuilder;
 
   const handleSelectField = (typeField: string) => {
-    dispatch(addInputTextField(typeField));
+    dispatch(addInputField(typeField));
   };
 
   return {

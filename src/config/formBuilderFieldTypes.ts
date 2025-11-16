@@ -7,4 +7,5 @@ interface FormBuilderFieldListProps {
 
 export const formBuilderFieldTypes: FormBuilderFieldListProps[] = [
   { label: "Input Text", value: "text" },
+  { label: "Input Number", value: "number" },
 ];
