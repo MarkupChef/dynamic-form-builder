@@ -4,14 +4,15 @@ import { Button } from "@/components/ui/button.tsx";
 import { Item, ItemActions, ItemContent } from "@/components/ui/item";
 import type { FormBuilderInputTextField } from "@/redux-store/slices/formBuilder.slice";
 import { TrashIcon } from "lucide-react";
+import styles from "./FieldItem.module.css";
 
 const FieldItem = ({ field }: { field: FormBuilderInputTextField }) => {
   const { remove } = useFieldItem();
 
   return (
-    <Item className={"border border-gray-200 border-dashed my-4"}>
+    <Item className={styles.root}>
       <ItemContent>
-        <div className="grid w-full max-w-sm items-center gap-3">
+        <div className={styles.content}>
           {field.formBuilderFieldType === "inputText" && (
             <InputTextConfigure field={field} />
           )}

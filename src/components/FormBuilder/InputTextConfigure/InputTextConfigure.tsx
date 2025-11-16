@@ -13,9 +13,9 @@ const InputTextConfigure = ({
 
   return (
     <>
-      {formBuilder.isShowLabels && (
+      {formBuilder.isShowLabels ? (
         <FormLabel htmlFor={field.id}>{field.label}</FormLabel>
-      )}
+      ) : null}
 
       <div className={"flex gap-2"}>
         <InputText fieldProps={field.props} />

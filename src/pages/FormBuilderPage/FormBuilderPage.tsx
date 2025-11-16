@@ -1,7 +1,13 @@
 import FormBuilder from "@/components/FormBuilder";
 import FormPreview from "@/components/FormBuilder/FormPreview";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -11,7 +17,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch.tsx";
+import { H1 } from "@/components/ui/typography.tsx";
 import { ROUTES } from "@/config/routes.ts";
+import PageLayout from "@/layouts/PageLayout";
 import { useAppDispatch, useAppSelector } from "@/redux-store/hooks.ts";
 import {
   resetFormBuilderSlice,
@@ -58,13 +66,23 @@ const FormBuilderPage = () => {
     navigate(ROUTES.forms);
   }
 
-  return (
-    <div>
-      <h1>Form Builder</h1>
-      <Card>
+  const content = (
+    <>
+      <Card className={"max-w-2xl mb-4"}>
+        <CardHeader>
+          <CardTitle>Form settings</CardTitle>
+          <CardAction>
+            <div className={"flex gap-2"}>
+              <FormPreview />
+              <Button type="button" onClick={form.handleSubmit(onSubmit)}>
+                Publish
+              </Button>
+            </div>
+          </CardAction>
+        </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form className="space-y-8">
               <FormField
                 control={form.control}
                 name="name"
@@ -86,35 +104,41 @@ const FormBuilderPage = () => {
                 name="isShowLabels"
                 render={({ field: f }) => (
                   <FormItem>
-                    <div className="grid gap-2">
-                      <div className="grid grid-cols-3 items-center gap-4">
-                        <FormLabel htmlFor={"fbIsShowLabels"}>
-                          Show Labels:
-                        </FormLabel>
-                        <FormControl>
-                          <Switch
-                            id={"fbIsShowLabels"}
-                            checked={f.value}
-                            onCheckedChange={(checked) => {
-                              handleShowLabels();
-                              f.onChange(checked);
-                            }}
-                          />
-                        </FormControl>
-                      </div>
+                    <div className="flex gap-4">
+                      <FormLabel htmlFor={"fbIsShowLabels"}>
+                        Show Labels:
+                      </FormLabel>
+                      <FormControl>
+                        <Switch
+                          id={"fbIsShowLabels"}
+                          checked={f.value}
+                          onCheckedChange={(checked) => {
+                            handleShowLabels();
+                            f.onChange(checked);
+                          }}
+                        />
+                      </FormControl>
                     </div>
                   </FormItem>
                 )}
               />
-              <Button type="submit">Publish</Button>
             </form>
           </Form>
-          <FormBuilder />
-          <FormPreview />
         </CardContent>
       </Card>
-    </div>
+
+      <Card className={"max-w-2xl"}>
+        <CardHeader>
+          <CardTitle>Fields</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <FormBuilder />
+        </CardContent>
+      </Card>
+    </>
   );
+
+  return <PageLayout header={<H1>Form Builder</H1>} content={content} />;
 };
 
 export default FormBuilderPage;

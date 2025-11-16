@@ -1,0 +1,8 @@
+@reference "@/index.css";
+
+.root{
+	@apply border border-gray-200 border-dashed my-4;
+}
+.content{
+	@apply grid w-full max-w-sm items-center gap-3;
+}
