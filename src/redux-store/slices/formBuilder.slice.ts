@@ -1,4 +1,4 @@
-import { InputTextSettingsSchema } from "@/components/FormBuilder/InputText/InputTextSettings/useInputTextSettings.ts";
+import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 import { z } from "zod";

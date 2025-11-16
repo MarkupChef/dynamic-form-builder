@@ -1,8 +1,8 @@
-import { FormBuilderSchema } from "@/components/FormBuilder/useFormBuilder.ts";
 import type {
   FormBuilderInputTextField,
   FormBuilderState,
 } from "@/redux-store/slices/formBuilder.slice.ts";
+import FormBuilderSchema from "@/schemas/FormBuilder.schema";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 import { z } from "zod";

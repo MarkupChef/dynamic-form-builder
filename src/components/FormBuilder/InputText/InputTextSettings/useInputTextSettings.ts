@@ -3,19 +3,10 @@ import {
   type FormBuilderInputTextField,
   saveInputTextSettings,
 } from "@/redux-store/slices/formBuilder.slice.ts";
+import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-export const InputTextSettingsSchema = z.object({
-  label: z.string(),
-  id: z.string(),
-  required: z.boolean(),
-  placeholder: z.string(),
-  minLength: z.number(),
-  maxLength: z.number(),
-  type: z.string(),
-});
 
 const useInputTextSettings = (field: FormBuilderInputTextField) => {
   const dispatch = useAppDispatch();
