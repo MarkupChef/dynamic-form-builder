@@ -1,0 +1,5 @@
+@reference "@/index.css";
+
+.formItem {
+	@apply border border-gray-200 border-dashed my-3;
+}
