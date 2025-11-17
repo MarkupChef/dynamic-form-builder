@@ -1,4 +1,4 @@
-import useInputTextSettings from "@/components/FormBuilder/InputText/InputTextSettings/useInputTextSettings.ts";
+import useInputNumberSettings from "@/components/FormBuilder/InputNumber/InputNumberSettings/useInputNumberSettings.ts";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Form,
@@ -14,29 +14,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover.tsx";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select.tsx";
 import { Switch } from "@/components/ui/switch.tsx";
 import { H4 } from "@/components/ui/typography.tsx";
 import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import { SettingsIcon } from "lucide-react";
 import styles from "./InputNumberSettings.module.css";
 
-const typesValue = [
-  { label: "Text", value: "text" },
-  {
-    label: "Email",
-    value: "email",
-  },
-];
-
 const InputNumberSettings = ({ field }: { field: FormBuilderInput }) => {
-  const { form, handleCloseSettings } = useInputTextSettings(field);
+  const { form, handleCloseSettings } = useInputNumberSettings(field);
   return (
     <Popover onOpenChange={handleCloseSettings}>
       <PopoverTrigger asChild>
@@ -45,7 +30,7 @@ const InputNumberSettings = ({ field }: { field: FormBuilderInput }) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80">
-        <H4 className={"mb-4"}>Input Text Settings</H4>
+        <H4 className={"mb-4"}>Input Number Settings</H4>
         <Form {...form}>
           <form className={styles.form}>
             <FormField
@@ -112,47 +97,14 @@ const InputNumberSettings = ({ field }: { field: FormBuilderInput }) => {
 
             <FormField
               control={form.control}
-              name={"type"}
+              name={"min"}
               render={({ field: f }) => (
                 <FormItem>
                   <div className={styles.formItem}>
-                    <Label htmlFor={`typeValue_${field.id}`}>Type:</Label>
-                    <FormControl>
-                      <Select
-                        name={f.name}
-                        value={f.value}
-                        onValueChange={f.onChange}
-                      >
-                        <SelectTrigger
-                          id={`typeValue_${field.id}`}
-                          className="min-w-[185px]"
-                        >
-                          <SelectValue placeholder="Select" />
-                        </SelectTrigger>
-                        <SelectContent position="item-aligned">
-                          {typesValue.map((type) => (
-                            <SelectItem key={type.value} value={type.value}>
-                              {type.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </div>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name={"minLength"}
-              render={({ field: f }) => (
-                <FormItem>
-                  <div className={styles.formItem}>
-                    <Label htmlFor={`minLength_${field.id}`}>Min Length:</Label>
+                    <Label htmlFor={`min_${field.id}`}>Min Value:</Label>
                     <FormControl>
                       <Input
-                        id={`minLength_${field.id}`}
+                        id={`min_${field.id}`}
                         className={styles.formItemInput}
                         type={"number"}
                         {...f}
@@ -165,14 +117,14 @@ const InputNumberSettings = ({ field }: { field: FormBuilderInput }) => {
 
             <FormField
               control={form.control}
-              name={"maxLength"}
+              name={"max"}
               render={({ field: f }) => (
                 <FormItem>
                   <div className={styles.formItem}>
-                    <Label htmlFor={`maxLength_${field.id}`}>Max Length:</Label>
+                    <Label htmlFor={`max_${field.id}`}>Max Value:</Label>
                     <FormControl>
                       <Input
-                        id={`maxLength_${field.id}`}
+                        id={`max_${field.id}`}
                         className={styles.formItemInput}
                         type={"number"}
                         {...f}

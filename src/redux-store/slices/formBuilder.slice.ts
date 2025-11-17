@@ -1,3 +1,4 @@
+import InputNumberSettingsSchema from "@/schemas/InputNumberSettings.schema.ts";
 import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
 import type FormBuilderState from "@/types/FormBuilderState.type.ts";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
@@ -82,6 +83,38 @@ const formBuilderSlice = createSlice({
       }
     },
 
+    saveInputSettings: (
+      state,
+      action: PayloadAction<
+        z.infer<
+          typeof InputTextSettingsSchema | typeof InputNumberSettingsSchema
+        >
+      >,
+    ) => {
+      const field = state.fields.find((f) => f.id === action.payload.id);
+
+      state.fields = state.fields.map((f) => {
+        if (f.id === action.payload.id) {
+          const { label, ...rest } = action.payload;
+
+          return {
+            ...f,
+            label,
+            props: {
+              ...f.props,
+              ...rest,
+            },
+          };
+        }
+
+        return f;
+      });
+
+      if (field) {
+        Object.assign(field.props, action.payload);
+      }
+    },
+
     removeField(state, action: PayloadAction<{ id: string }>) {
       state.fields = state.fields.filter((f) => f.id !== action.payload.id);
     },
@@ -93,6 +126,7 @@ export const {
   toggleIsLabels,
   addInputField,
   addInputTextField,
+  saveInputSettings,
   saveInputTextSettings,
   removeField,
 } = formBuilderSlice.actions;
