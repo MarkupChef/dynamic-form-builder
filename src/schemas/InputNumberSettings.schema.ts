@@ -1,13 +1,13 @@
 import { z } from "zod";
 
 const InputNumberSettingsSchema = z.object({
-  label: z.string(),
+  label: z.string().optional(),
   id: z.string(),
   required: z.boolean(),
-  placeholder: z.string(),
-  min: z.number(),
-  max: z.number(),
-  type: z.string(),
+  placeholder: z.string().optional(),
+  min: z.number().optional(),
+  max: z.number().optional(),
+  type: z.literal("number"),
 });
 
 export default InputNumberSettingsSchema;

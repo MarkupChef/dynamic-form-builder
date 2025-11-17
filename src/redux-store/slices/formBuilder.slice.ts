@@ -1,5 +1,6 @@
 import InputNumberSettingsSchema from "@/schemas/InputNumberSettings.schema.ts";
 import InputTextSettingsSchema from "@/schemas/InputTextSettings.schema";
+import type { FormBuilderFieldTypes } from "@/types/FormBuilderInputTypes.type.ts";
 import type FormBuilderState from "@/types/FormBuilderState.type.ts";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
@@ -20,7 +21,7 @@ const formBuilderSlice = createSlice({
     toggleIsLabels: (state) => {
       state.isShowLabels = !state.isShowLabels;
     },
-    addInputField: (state, action: PayloadAction<string>) => {
+    addInputField: (state, action: PayloadAction<FormBuilderFieldTypes>) => {
       const id = `Field_${nanoid()}`;
 
       state.fields.push({

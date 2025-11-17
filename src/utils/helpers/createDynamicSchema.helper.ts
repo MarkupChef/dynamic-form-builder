@@ -4,41 +4,75 @@ import { z } from "zod";
 export function createDynamicSchema(fields: FormBuilderInput[]) {
   const shape: Record<string, any> = {};
 
-  fields.forEach((field) => {
+  fields.forEach(({ props }) => {
     let schema;
 
-    const props = field.props;
+    const fieldType = props.type;
 
     if (!props.name) {
       return {};
     }
 
-    if (props.type === "text") {
-      schema = z.string();
+    switch (fieldType) {
+      case "text": {
+        schema = z.string();
 
-      if (props.minLength !== undefined) {
-        schema = schema.min(
-          props.minLength,
-          `Input must be at least ${props.minLength} characters`,
-        );
+        if (props.minLength !== undefined) {
+          schema = schema.min(
+            props.minLength,
+            `Input must be at least ${props.minLength} characters`,
+          );
+        }
+
+        if (props.maxLength !== undefined) {
+          schema = schema.max(props.maxLength);
+        }
+
+        if (props.required) {
+          schema = schema.min(1, "Field is required");
+        } else {
+          schema = schema.optional();
+        }
+        break;
       }
 
-      if (props.maxLength !== undefined) {
-        schema = schema.max(props.maxLength);
+      case "email": {
+        schema = z.email("Input must be a valid email address");
+
+        if (!props.required) {
+          schema = schema.optional();
+        }
+        break;
       }
 
-      if (props.required) {
-        schema = schema.min(1, "Field is required");
-      } else {
-        schema = schema.optional();
+      case "number": {
+        if (props.required) {
+          schema = z.string().min(1, "Field is required");
+        } else {
+          schema = z.string().optional();
+        }
+
+        schema = schema.transform((val) => Number(val));
+
+        if (props.min !== undefined) {
+          schema = schema.refine(
+            (v) => v >= props.min!,
+            `The value must be at least ${props.min}`,
+          );
+        }
+
+        if (props.max !== undefined) {
+          schema = schema.refine(
+            (v) => v <= props.max!,
+            `The value must be at most ${props.max}`,
+          );
+        }
+
+        break;
       }
-    }
 
-    if (props.type === "email") {
-      schema = z.email("Input must be a valid email address");
-
-      if (!props.required) {
-        schema = schema.optional();
+      default: {
+        schema = z.any().optional();
       }
     }
 

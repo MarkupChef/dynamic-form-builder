@@ -1,3 +1,4 @@
+import InputNumber from "@/components/FormBuilder/InputNumber";
 import InputText from "@/components/FormBuilder/InputText";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -51,7 +52,14 @@ const BuiltForm = ({ builtForm }: { builtForm: FormBuilderState }) => {
                     </FormLabel>
                   )}
                   <FormControl>
-                    <InputText field={field} fieldProps={builtField.props} />
+                    {builtField.formBuilderFieldType === "text" ? (
+                      <InputText field={field} fieldProps={builtField.props} />
+                    ) : builtField.formBuilderFieldType === "number" ? (
+                      <InputNumber
+                        field={field}
+                        fieldProps={builtField.props}
+                      />
+                    ) : null}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
