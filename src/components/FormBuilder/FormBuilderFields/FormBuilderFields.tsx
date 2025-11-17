@@ -41,7 +41,7 @@ const FormBuilderEmpty = () => {
 const FormBuilderFields = () => {
   const { formFields, fields, handleSelectField } = useFormBuilderFields();
 
-  const renderList = () =>
+  const renderFieldList = () =>
     fields.map((field) => <FieldItem key={field.id} field={field} />);
 
   return (
@@ -52,7 +52,7 @@ const FormBuilderFields = () => {
       <CardContent>
         <Form {...formFields}>
           <form>
-            {fields.length > 0 ? renderList() : <FormBuilderEmpty />}
+            {fields.length > 0 ? renderFieldList() : <FormBuilderEmpty />}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className={"text-center"}>
