@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# Protocol Hero Test -- Form Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight Form Builder application that allows users to create,
+configure, preview, and manage dynamic forms.\
+This project was built as a test assignment with the goal of
+implementing the full logic of a form‑building system, including field
+configuration and runtime validation.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   React.js
+-   TypeScript
+-   Redux Toolkit
+-   Redux Persist
+-   React Hook Form
+-   Zod
+-   Tailwind CSS
+-   shadcn/ui
+-   Vite
 
-## React Compiler
+## 📁 Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+    /src
+      /components      → Reusable UI components
+      /config          → Application-level configs
+      /hooks           → Custom React hooks
+      /layouts         → Layout wrappers
+      /lib             → Shared utilities & helpers
+      /pages           → Application pages
+      /redux-store     → Store, slices, and persistence setup
+      /schemas         → Zod schemas
+      /types           → TypeScript types & interfaces
+      /utils           → General utility functions
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔧 User Capabilities
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+-   Create new forms
+-   View a generated forms
+-   Add and customize fields
+-   Preview a generated form
+-   Delete forms
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🧩 Supported Field Types
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+-   Text (can be switched to email inside field settings)
+-   Number
+
+Adding new field types is implemented according to similar logic.
+
+### 🛡️ Built-in Validation
+
+All user-created forms are validated using a dynamically generated Zod
+schema\
+based on the fields configured in the builder.
+
+## 🧠 Core Technical Decisions
+
+-   Dynamic Zod Schema Generation\
+    Validation rules are generated at runtime according to field
+    definitions.
+
+-   Type-Safe Discriminated Union for InputProps\
+    Eliminates duplicated types and ensures strict field-type--based
+    narrowing.
+
+-   State Management with Redux Toolkit\
+    Stores builder state, field configurations, and user-created forms.
+
+-   State Persistence via Redux Persist\
+    Ensures that form builder progress is preserved across page reloads.
+
+## ▶️ Getting Started
+
+### Install dependencies
+
+``` bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+``` bash
+npm run dev
 ```
+
+### Build for production
+
+``` bash
+npm run build
+```
+
+### Preview the production build
+
+``` bash
+npm run preview
+```
+
+## 📄 License
+
+This project is for test and demonstration purposes.
