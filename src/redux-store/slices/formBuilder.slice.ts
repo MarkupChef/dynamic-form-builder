@@ -38,51 +38,6 @@ const formBuilderSlice = createSlice({
         },
       });
     },
-    addInputTextField: (state, action: PayloadAction<string>) => {
-      const id = `Field_${nanoid()}`;
-
-      state.fields.push({
-        formBuilderFieldType: action.payload,
-        id,
-        label: "Label text",
-        props: {
-          id: id,
-          name: id,
-          value: "",
-          placeholder: "Example",
-          required: false,
-          type: "text",
-        },
-      });
-    },
-
-    saveInputTextSettings: (
-      state,
-      action: PayloadAction<z.infer<typeof InputTextSettingsSchema>>,
-    ) => {
-      const field = state.fields.find((f) => f.id === action.payload.id);
-
-      state.fields = state.fields.map((f) => {
-        if (f.id === action.payload.id) {
-          const { label, ...rest } = action.payload;
-
-          return {
-            ...f,
-            label,
-            props: {
-              ...f.props,
-              ...rest,
-            },
-          };
-        }
-
-        return f;
-      });
-
-      if (field) {
-        Object.assign(field.props, action.payload);
-      }
-    },
 
     saveInputSettings: (
       state,
@@ -93,27 +48,14 @@ const formBuilderSlice = createSlice({
       >,
     ) => {
       const field = state.fields.find((f) => f.id === action.payload.id);
-
-      state.fields = state.fields.map((f) => {
-        if (f.id === action.payload.id) {
-          const { label, ...rest } = action.payload;
-
-          return {
-            ...f,
-            label,
-            props: {
-              ...f.props,
-              ...rest,
-            },
-          };
-        }
-
-        return f;
-      });
-
-      if (field) {
-        Object.assign(field.props, action.payload);
+      if (!field) {
+        return;
       }
+
+      const { label, ...rest } = action.payload;
+
+      field.label = label;
+      Object.assign(field.props, rest);
     },
 
     removeField(state, action: PayloadAction<{ id: string }>) {
@@ -126,9 +68,7 @@ export const {
   resetFormBuilderSlice,
   toggleIsLabels,
   addInputField,
-  addInputTextField,
   saveInputSettings,
-  saveInputTextSettings,
   removeField,
 } = formBuilderSlice.actions;
 export default formBuilderSlice.reducer;
