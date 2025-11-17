@@ -3,6 +3,7 @@ import useFormBuilderFields from "@/components/FormBuilder/FormBuilderFields/use
 import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
+  CardAction,
   CardContent,
   CardHeader,
   CardTitle,
@@ -39,7 +40,8 @@ const FormBuilderEmpty = () => {
 };
 
 const FormBuilderFields = () => {
-  const { formFields, fields, handleSelectField } = useFormBuilderFields();
+  const { formFields, fields, reset, handleSelectField } =
+    useFormBuilderFields();
 
   const renderFieldList = () =>
     fields.map((field) => <FieldItem key={field.id} field={field} />);
@@ -48,6 +50,13 @@ const FormBuilderFields = () => {
     <Card className={"max-w-2xl"}>
       <CardHeader>
         <CardTitle>Fields</CardTitle>
+        {fields.length > 0 && (
+          <CardAction>
+            <Button variant={"secondary"} onClick={reset}>
+              Reset
+            </Button>
+          </CardAction>
+        )}
       </CardHeader>
       <CardContent>
         <Form {...formFields}>

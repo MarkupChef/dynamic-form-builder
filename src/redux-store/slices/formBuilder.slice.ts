@@ -18,6 +18,9 @@ const formBuilderSlice = createSlice({
   initialState,
   reducers: {
     resetFormBuilderSlice: () => initialState,
+    resetFields: (state) => {
+      state.fields = [];
+    },
     toggleIsLabels: (state) => {
       state.isShowLabels = !state.isShowLabels;
     },
@@ -66,6 +69,7 @@ const formBuilderSlice = createSlice({
 
 export const {
   resetFormBuilderSlice,
+  resetFields,
   toggleIsLabels,
   addInputField,
   saveInputSettings,
