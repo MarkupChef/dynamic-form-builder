@@ -75,6 +75,8 @@ based on the fields configured in the builder.
 
 ### Install dependencies
 
+Use **Node.js 20.19+** or **Node.js 22.12+**
+
 ``` bash
 npm install
 ```
