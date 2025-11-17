@@ -43,7 +43,14 @@ const FormList = () => {
     builtFormList.map((item) => (
       <Item key={item.id} className={styles.formItem}>
         <ItemContent>
-          <ItemTitle>{item.name}</ItemTitle>
+          <ItemTitle className={"w-full"}>
+            <NavLink
+              className={styles.formItemLink}
+              to={`${ROUTES.forms}/${item.id}`}
+            >
+              {item.name}
+            </NavLink>
+          </ItemTitle>
         </ItemContent>
         <ItemActions>
           <Button

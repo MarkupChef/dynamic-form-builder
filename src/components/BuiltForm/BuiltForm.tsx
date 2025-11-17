@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/form.tsx";
 import { useAppSelector } from "@/redux-store/hooks.ts";
 import type FormBuilderState from "@/types/FormBuilderState.type";
+import type { InputNumberProps } from "@/types/InputNumberProps.type.ts";
+import type { InputTextProps } from "@/types/InputTextProps.type.ts";
 import { createDefaultValues } from "@/utils/helpers/createDefaultValues.helper.ts";
 import { createDynamicSchema } from "@/utils/helpers/createDynamicSchema.helper.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,6 +32,10 @@ const BuiltForm = ({ builtForm }: { builtForm: FormBuilderState }) => {
   const onSubmit = () => {
     alert("The form has been completed successfully.");
   };
+
+  if (!builtForm.fields.length) {
+    return <div>No Fields</div>;
+  }
 
   return (
     <Form {...form}>
@@ -53,11 +59,14 @@ const BuiltForm = ({ builtForm }: { builtForm: FormBuilderState }) => {
                   )}
                   <FormControl>
                     {builtField.formBuilderFieldType === "text" ? (
-                      <InputText field={field} fieldProps={builtField.props} />
+                      <InputText
+                        field={field}
+                        fieldProps={builtField.props as InputTextProps}
+                      />
                     ) : builtField.formBuilderFieldType === "number" ? (
                       <InputNumber
                         field={field}
-                        fieldProps={builtField.props}
+                        fieldProps={builtField.props as InputNumberProps}
                       />
                     ) : null}
                   </FormControl>

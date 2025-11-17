@@ -3,3 +3,7 @@
 .formItem {
 	@apply border border-gray-200 border-dashed my-3;
 }
+
+.formItemLink {
+	@apply w-full text-xl font-bold hover:text-gray-600;
+}
