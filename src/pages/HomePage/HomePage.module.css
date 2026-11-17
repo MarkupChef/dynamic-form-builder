@@ -31,5 +31,5 @@
 }
 
 .button {
-	@apply text-xl p-6;
+	@apply h-12 px-8 text-base;
 }
