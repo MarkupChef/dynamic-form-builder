@@ -1,104 +1,75 @@
-# Form Builder
+# Dynamic Form Builder
 
-A lightweight Form Builder application that allows users to create,
-configure, preview, and manage dynamic forms.\
-This project was built as a test assignment with the goal of
-implementing the full logic of a form‑building system, including field
-configuration and runtime validation.
+[![CI](https://github.com/MarkupChef/dynamic-form-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/MarkupChef/dynamic-form-builder/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 🚀 Tech Stack
+Dynamic form builder with configurable fields, live preview, runtime Zod validation, and local persistence.
 
--   React.js
--   TypeScript
--   Redux Toolkit
--   Redux Persist
--   React Hook Form
--   Zod
--   Tailwind CSS
--   shadcn/ui
--   Vite
+**Live demo:** https://dynamic-form-builder.vercel.app
 
-## 📁 Project Structure
+![Dynamic Form Builder](preview.png)
 
-    /src
-      /components      → Reusable UI components
-      /config          → Application-level configs
-      /hooks           → Custom React hooks
-      /layouts         → Layout wrappers
-      /lib             → Shared utilities & helpers
-      /pages           → Application pages
-      /redux-store     → Store, slices, and persistence setup
-      /schemas         → Zod schemas
-      /types           → TypeScript types & interfaces
-      /utils           → General utility functions
+## Features
 
-## ✨ Features
+- Add and configure text, email, and number fields
+- Set required, length, and value constraints
+- Preview a form before saving
+- Store, open, and delete forms locally
+- Keep builder progress across page reloads
 
-### 🔧 User Capabilities
+## Tech Stack
 
--   Create new forms
--   View a generated forms
--   Add and customize fields
--   Preview a generated form
--   Delete forms
+- React 19, TypeScript, Vite
+- Redux Toolkit and Redux Persist
+- React Hook Form and Zod
+- Tailwind CSS and shadcn/ui
+- Vitest
 
-### 🧩 Supported Field Types
+## Getting Started
 
--   Text (can be switched to email inside field settings)
--   Number
+Requires Node.js 20.19+ or 22.12+ (see `.nvmrc`).
 
-Adding new field types is implemented according to similar logic.
-
-### 🛡️ Built-in Validation
-
-All user-created forms are validated using a dynamically generated Zod
-schema\
-based on the fields configured in the builder.
-
-## 🧠 Core Technical Decisions
-
--   Dynamic Zod Schema Generation\
-    Validation rules are generated at runtime according to field
-    definitions.
-
--   Type-Safe Discriminated Union for InputProps\
-    Eliminates duplicated types and ensures strict field-type--based
-    narrowing.
-
--   State Management with Redux Toolkit\
-    Stores builder state, field configurations, and user-created forms.
-
--   State Persistence via Redux Persist\
-    Ensures that form builder progress is preserved across page reloads.
-
-## ▶️ Getting Started
-
-### Install dependencies
-
-Use **Node.js 20.19+** or **Node.js 22.12+**
-
-``` bash
+```bash
 npm install
-```
-
-### Run the development server
-
-``` bash
 npm run dev
 ```
 
-### Build for production
+### Scripts
 
-``` bash
-npm run build
+| Command             | Description                     |
+| ------------------- | ------------------------------- |
+| `npm run typecheck` | Type-check the project          |
+| `npm run lint`      | Run ESLint                      |
+| `npm test`          | Run unit tests                  |
+| `npm run build`     | Type-check and build for production |
+| `npm run preview`   | Preview the production build    |
+
+## Key Architectural Decisions
+
+- **Runtime Zod schemas.** Validation rules are generated from field definitions, so every saved form validates itself.
+- **Discriminated unions for field props.** Field types narrow strictly, which avoids duplicated types and unsafe casts.
+- **Redux Toolkit state.** One slice holds the form being built, another holds saved forms.
+- **Local persistence.** Redux Persist stores state in the browser.
+- **Name-based values.** Form values and schema keys use the configured field name, not the internal id.
+
+## How It Works
+
+```mermaid
+flowchart LR
+  A[Create form] --> B[Configure fields]
+  B --> C[Preview]
+  C --> D[Save]
+  D --> E[(Local persistence)]
+  E --> F[Open / Delete]
 ```
 
-### Preview the production build
+## Limitations
 
-``` bash
-npm run preview
-```
+- Data is stored locally in the browser only
+- Three field types: text, email, and number
+- Saved forms cannot be edited
+- No backend, import/export, or collaboration
 
-## 📄 License
+## License
 
-This project is for test and demonstration purposes.
+[MIT](LICENSE)
