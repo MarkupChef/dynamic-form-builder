@@ -49,7 +49,7 @@ const BuiltForm = ({ builtForm }: { builtForm: FormBuilderState }) => {
             <FormField
               key={`preview_${builtField.id}`}
               control={form.control}
-              name={builtField.id}
+              name={builtField.props.name}
               render={({ field }) => (
                 <FormItem>
                   {formBuilder.isShowLabels && (

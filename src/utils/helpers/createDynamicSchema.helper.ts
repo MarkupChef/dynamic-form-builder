@@ -2,77 +2,87 @@ import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 import { z } from "zod";
 
 export function createDynamicSchema(fields: FormBuilderInput[]) {
-  const shape: Record<string, any> = {};
+  const shape: Record<string, z.ZodType> = {};
 
   fields.forEach(({ props }) => {
-    let schema;
-
-    const fieldType = props.type;
+    let schema: z.ZodType;
 
     if (!props.name) {
-      return {};
+      return;
     }
 
-    switch (fieldType) {
+    switch (props.type) {
       case "text": {
-        schema = z.string();
+        let textSchema = z.string();
 
         if (props.minLength !== undefined) {
-          schema = schema.min(
+          textSchema = textSchema.min(
             props.minLength,
             `Input must be at least ${props.minLength} characters`,
           );
         }
 
         if (props.maxLength !== undefined) {
-          schema = schema.max(props.maxLength);
+          textSchema = textSchema.max(props.maxLength);
         }
 
-        if (props.required) {
-          schema = schema.min(1, "Field is required");
-        } else {
-          schema = schema.optional();
-        }
+        schema = props.required
+          ? textSchema.min(1, "Field is required")
+          : textSchema.optional();
         break;
       }
 
       case "email": {
-        schema = z.email("Input must be a valid email address");
+        const emailSchema = z.email("Input must be a valid email address");
 
-        if (!props.required) {
-          schema = schema.optional();
-        }
+        schema = props.required
+          ? emailSchema
+          : z
+              .union([z.literal(""), emailSchema])
+              .optional()
+              .transform((val) => (val === "" ? undefined : val));
         break;
       }
 
       case "number": {
-        if (props.required) {
-          schema = z.string().min(1, "Field is required");
-        } else {
-          schema = z.string().optional();
-        }
+        const { min, max } = props;
 
-        schema = schema.transform((val) => Number(val));
+        schema = (
+          props.required
+            ? z.string().min(1, "Field is required")
+            : z.string().optional()
+        )
+          .transform((val, ctx) => {
+            if (val === undefined || val === "") {
+              return undefined;
+            }
 
-        if (props.min !== undefined) {
-          schema = schema.refine(
-            (v) => v >= props.min!,
-            `The value must be at least ${props.min}`,
+            const parsed = Number(val);
+
+            if (Number.isNaN(parsed)) {
+              ctx.addIssue({
+                code: "custom",
+                message: "Input must be a valid number",
+              });
+              return z.NEVER;
+            }
+
+            return parsed;
+          })
+          .refine(
+            (v) => v === undefined || min === undefined || v >= min,
+            `The value must be at least ${min}`,
+          )
+          .refine(
+            (v) => v === undefined || max === undefined || v <= max,
+            `The value must be at most ${max}`,
           );
-        }
-
-        if (props.max !== undefined) {
-          schema = schema.refine(
-            (v) => v <= props.max!,
-            `The value must be at most ${props.max}`,
-          );
-        }
 
         break;
       }
 
       default: {
-        schema = z.any().optional();
+        schema = z.unknown().optional();
       }
     }
 
