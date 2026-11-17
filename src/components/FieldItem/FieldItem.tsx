@@ -29,11 +29,11 @@ const FieldItem = ({ field }: { field: FormBuilderInput }) => {
           )}
         </div>
       </ItemContent>
-      <ItemActions>
+      <ItemActions className="self-end">
         <Button
           type={"button"}
           variant="outline"
-          size="sm"
+          size="icon"
           onClick={() => remove(field.id)}
         >
           <TrashIcon color="red" size={48} />

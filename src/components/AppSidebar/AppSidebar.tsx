@@ -4,11 +4,12 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+  SidebarSeparator,
+}from "@/components/ui/sidebar";
 
 import { Large, Small } from "@/components/ui/typography.tsx";
 import mainNavigation from "@/config/mainNavigation.ts";
@@ -37,18 +38,19 @@ function AppSidebar() {
 
   return (
     <Sidebar>
+      <SidebarHeader className="px-6 py-5">
+        <Large>Dynamic Form Builder</Large>
+      </SidebarHeader>
+      <SidebarSeparator className="mx-0" />
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>
-            <Large>Form Builder</Large>
-          </SidebarGroupLabel>
+        <SidebarGroup className="px-4 py-4">
           <SidebarGroupContent>
-            <SidebarMenu>{renderNav()}</SidebarMenu>
+            <SidebarMenu className="gap-2">{renderNav()}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <Small>Copyright 2025</Small>
+      <SidebarFooter className="px-6 py-5">
+        <Small>Copyright {new Date().getFullYear()}</Small>
       </SidebarFooter>
     </Sidebar>
   );

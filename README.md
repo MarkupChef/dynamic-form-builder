@@ -7,7 +7,7 @@ Dynamic form builder with configurable fields, live preview, runtime Zod validat
 
 **Live demo:** https://dynamic-form-builder-weld.vercel.app
 
-![Dynamic Form Builder](preview.png)
+![Dynamic Form Builder](preview.jpg)
 
 ## Features
 
