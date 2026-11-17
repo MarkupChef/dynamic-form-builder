@@ -1,13 +1,20 @@
 import type FormBuilderInput from "@/types/FormBuilderInput.type.ts";
 
-export function createDefaultValues(fields: FormBuilderInput[]) {
-  const defaults: Record<string, any> = {};
+export type DefaultValues = Record<string, string | undefined>;
 
-  fields.forEach((f) => {
-    const name = f.id;
+export function createDefaultValues(fields: FormBuilderInput[]): DefaultValues {
+  const defaults: DefaultValues = {};
 
-    switch (f.props.type) {
+  fields.forEach(({ props }) => {
+    const name = props.name;
+
+    if (!name) {
+      return;
+    }
+
+    switch (props.type) {
       case "text":
+      case "email":
       case "number":
         defaults[name] = "";
         break;
